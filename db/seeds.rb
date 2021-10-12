@@ -1,7 +1,26 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#new users
+User.create!(email: "dave@gmail.com",	password: "popcorn", first_name: "Dave", zip_code: 60045, profile_picture: "scryfall.api/123", age: 32, about_me: "Hi, looking for a group to practice some standard deck or play arena")
+User.create!(email: "test@test.com", password: "elephant", first_name:	"Jack", zip_code: 60045, profile_picture: "scryfall.api/124", age: 25, about_me: "Just about_me: looking for a store that plays legacy, anyone know?")
+User.create!(email: "joe@test.com", password: "password", first_name: "Joe", zip_code: 60067, profile_picture: "scryfall.api/124445", age: 29, about_me: "What is this thing??")
+User.create!(email: "bob@test.com", password: "password", first_name: "bob", zip_code: 60557, profile_picture: "scryfall.api/123234", age: 15, about_me: "Hey what's up guys")
+#their formats
+Favoriteformat.create!(format: "EDH", user_id: 1)
+Favoriteformat.create!(format: "Cube", user_id: 1)
+Favoriteformat.create!(format: "Legacy", user_id: 1)
+Favoriteformat.create!(format: "EDH", user_id: 2)
+Favoriteformat.create!(format: "Cube", user_id: 2)
+#their relationships
+Relationship.create!(requester_id: 1, responder_id: 2, status: "accepted")
+Relationship.create!(requester_id: 3, responder_id: 2, status: "accepted")
+Relationship.create!(requester_id: 3, responder_id: 1, status: "pending")
+Relationship.create!(requester_id: 4, responder_id: 1, status: "blocked")
+Relationship.create!(requester_id: 4, responder_id: 2, status: "blocked")
+Relationship.create!(requester_id: 4, responder_id: 3, status: "pending")
+#their messages
+Message.create!(sender_id: 1, receiver_id: 2, text: "hi jack")
+Message.create!(sender_id: 2, receiver_id: 1, text: "what's up?")
+Message.create!(sender_id: 1, receiver_id: 2, text: "do you play cube?")
+Message.create!(sender_id: 2, receiver_id: 1, text: "I've never tried it, but i'd be willing to play")
+Message.create!(sender_id: 1, receiver_id: 2, text: "Cool! Let's play on Friday at <insert local game store>")
+Message.create!(sender_id: 2, receiver_id: 1, text: "ok")
+Message.create!(sender_id: 3, receiver_id: 1, text: "hey")
