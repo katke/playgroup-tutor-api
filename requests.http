@@ -1,0 +1,57 @@
+@host = http://localhost:3000
+
+# Users #
+### USERS INDEX
+  GET {{host}}/users.json
+### USERS SHOW
+  GET {{host}}/users/6.json
+### USERS CREATE
+  POST {{host}}/users.json
+  Content-Type: application/json
+
+  {
+    "email": "blahblah@gmail.com",
+    "password": "password",
+    "first_name": "sam",
+    "zip_code": 401234,
+    "profile_picture": "google.com/slaksjdlkj",
+    "age": 24,
+    "about_me": "looking to play magic for the first time!"
+  }
+### USERS UPDATE
+  ATCH {{host}}/users/6
+  Content-Type: application/json
+
+  {
+    "zip_code": 60067
+  }
+### USERS DESTROY
+  DELETE {{host}}/users/6
+
+# Messages #
+### MESSAGES INDEX
+  GET http://localhost:3000/messages.json
+### MESSAGES SHOW
+GET 
+### MESSAGES SHOW
+  GET {{host}}/messages/7.json
+### MESSAGES CREATE
+  POST {{host}}/messages.json
+  Content-Type: application/json
+
+  {
+    "text": "blahblah",
+    "sender_id": 2,
+    "receiver_id": 1
+  }
+### MESSAGES UPDATE
+  ATCH {{host}}/messages/7
+  Content-Type: application/json
+
+  {
+    "text": "blaksndlad"
+  }
+### MESSAGES DESTROY
+  DELETE {{host}}/messages/6
+
+# next #
