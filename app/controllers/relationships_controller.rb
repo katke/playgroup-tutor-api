@@ -11,7 +11,7 @@ class RelationshipsController < ApplicationController
 
   def create
     relationship = Relationship.new(
-      requester_id: params[:requester_id],
+      requester_id: current_user.id,
       responder_id: params[:responder_id],
       status: "Pending",
     )

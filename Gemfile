@@ -39,3 +39,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #pass encrypting
 gem 'bcrypt', '~> 3.1.7'
+
+#json web token
+gem 'jwt'

@@ -1,4 +1,15 @@
 @host = http://localhost:3000
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo4LCJleHAiOjE2MzQzOTU5MTd9.HsO-hIWTIwxkaP2LBBDqHA9IS2QZqKKQQtdkuKyFYdY
+
+# SESSIONS CREATE (login) #
+  POST {{host}}/sessions.json
+  Content-Type: application/json
+
+  {
+    "email": "test@gmail.com",
+    "password": "password"
+  }
+
 
 # Users #
 ### USERS INDEX
@@ -10,7 +21,7 @@
   Content-Type: application/json
 
   {
-    "email": "blahblah@gmail.com",
+    "email": "test@gmail.com",
     "password": "password",
     "first_name": "sam",
     "zip_code": 401234,
@@ -31,17 +42,20 @@
 # Messages #
 ### MESSAGES INDEX
   GET http://localhost:3000/messages.json
+  Authorization: Bearer {{jwt}}
 
 ### MESSAGES SHOW
-  GET {{host}}/messages/7.json
+  GET {{host}}/messages/10.json
+  Authorization: Bearer {{jwt}}
+
 ### MESSAGES CREATE
   POST {{host}}/messages.json
   Content-Type: application/json
+  Authorization: Bearer {{jwt}}
 
   {
     "text": "blahblah",
-    "sender_id": 2,
-    "receiver_id": 1
+    "receiver_id": 2
   }
 ### MESSAGES UPDATE
   PATCH {{host}}/messages/7
@@ -63,10 +77,10 @@
 ### RELATIONSHIP CREATE
   POST {{host}}/relationships.json
   Content-Type: application/json
+  Authorization: Bearer {{jwt}}
 
   {
-    "requester_id": 2,
-    "responder_id": 1
+    "responder_id": 3
   }
 ### RELATIONSHIP UPDATE
   PATCH {{host}}/relationships/7
