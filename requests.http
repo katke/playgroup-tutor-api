@@ -31,8 +31,7 @@
 # Messages #
 ### MESSAGES INDEX
   GET http://localhost:3000/messages.json
-### MESSAGES SHOW
-GET 
+
 ### MESSAGES SHOW
   GET {{host}}/messages/7.json
 ### MESSAGES CREATE
@@ -45,7 +44,7 @@ GET
     "receiver_id": 1
   }
 ### MESSAGES UPDATE
-  ATCH {{host}}/messages/7
+  PATCH {{host}}/messages/7
   Content-Type: application/json
 
   {
@@ -53,5 +52,30 @@ GET
   }
 ### MESSAGES DESTROY
   DELETE {{host}}/messages/6
+
+# next #
+# Relationships #
+### RELATIONSHIP INDEX
+  GET http://localhost:3000/relationships.json
+
+### RELATIONSHIP SHOW
+  GET {{host}}/relationships/7.json
+### RELATIONSHIP CREATE
+  POST {{host}}/relationships.json
+  Content-Type: application/json
+
+  {
+    "requester_id": 2,
+    "responder_id": 1
+  }
+### RELATIONSHIP UPDATE
+  PATCH {{host}}/relationships/7
+  Content-Type: application/json
+
+  {
+    "status": "Accepted"
+  }
+### RELATIONSHIP DESTROY
+  DELETE {{host}}/relationships/6
 
 # next #

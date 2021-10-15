@@ -11,4 +11,16 @@ Rails.application.routes.draw do
   post "/messages" => "messages#create"
   patch "/messages/:id" => "messages#update"
   delete "/messages/:id" => "messages#destroy"
+  #relationships
+  get "/relationships" => "relationships#index"
+  get "/relationships/:id" => "relationships#show"
+  post "/relationships" => "relationships#create"
+  patch "/relationships/:id" => "relationships#update"
+  delete "/relationships/:id" => "relationships#destroy"
+  #favorite_formats
+  get "/favoriteformats" => "favoriteformats#index"
+  get "/favoriteformats/:id" => "favoriteformats#show"
+  post "/favoriteformats" => "favoriteformats#create"
+  patch "/favoriteformats/:id" => "favoriteformats#update"
+  delete "/favoriteformats/:id" => "favoriteformats#destroy"
 end
