@@ -1,5 +1,5 @@
 @host = http://localhost:3000
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo4LCJleHAiOjE2MzQzOTU5MTd9.HsO-hIWTIwxkaP2LBBDqHA9IS2QZqKKQQtdkuKyFYdY
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo4LCJleHAiOjE2MzQ2Nzg3MzB9.jezQcKluN1qMP2XHEHivK3ZauPUga-IG45Hn1fip0wE
 
 # SESSIONS CREATE (login) #
   POST {{host}}/sessions.json
@@ -67,20 +67,23 @@
 ### MESSAGES DESTROY
   DELETE {{host}}/messages/6
 
-# next #
 # Relationships #
+### Friendships
+GET {{host}}/friends
+Authorization: Bearer {{jwt}}
+
 ### RELATIONSHIP INDEX
   GET http://localhost:3000/relationships.json
 
 ### RELATIONSHIP SHOW
-  GET {{host}}/relationships/7.json
+  GET {{host}}/relationships/6.json
 ### RELATIONSHIP CREATE
   POST {{host}}/relationships.json
   Content-Type: application/json
   Authorization: Bearer {{jwt}}
 
   {
-    "responder_id": 3
+    "responder_id": 4
   }
 ### RELATIONSHIP UPDATE
   PATCH {{host}}/relationships/7

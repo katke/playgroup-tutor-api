@@ -1,13 +1,4 @@
 Rails.application.routes.draw do
-  # 5 starting routes
-  post "/users" => "users#create"
-  post "/sessions" => "sessions#create"
-  post "/messages" => "messages#create"
-  get "/users" => "users#index"
-  post "/relationships" => "relationships#create"
-
-
-
   #users
   get "/users" => "users#index"
   get "/users/:id" => "users#show"
@@ -17,6 +8,7 @@ Rails.application.routes.draw do
   #sessions
   post "/sessions" => "sessions#create"
   #messages
+  get "/my-messages" => "messages#my_messages"
   get "/messages" => "messages#index"
   get "/messages/:id" => "messages#show"
   post "/messages" => "messages#create"
@@ -24,6 +16,7 @@ Rails.application.routes.draw do
   patch "/messages/:id" => "messages#update"
   delete "/messages/:id" => "messages#destroy"
   #relationships
+  get "/friends" => "relationships#friends"
   get "/relationships" => "relationships#index"
   get "/relationships/:id" => "relationships#show"
   post "/relationships" => "relationships#create"

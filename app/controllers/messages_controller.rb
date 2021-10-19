@@ -6,6 +6,13 @@ class MessagesController < ApplicationController
     render json: messages
   end
 
+  def my_messages
+    messages = Message.select { |message|
+      message.sender_id == current_user.id || message.receiver_id == current_user.id
+    }
+    render json: messages
+  end
+
   def show
     message = current_user.sent_messages.find_by(id: "#{params[:id]}")
     if message
