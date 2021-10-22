@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find_by(id: "#{params["id"]}")
+    user = User.find_by(id: current_user.id)
     user.email = params[:email] || user.email
     user.first_name = params[:first_name] || user.first_name
     user.zip_code = params[:zip_code] || user.zip_code
