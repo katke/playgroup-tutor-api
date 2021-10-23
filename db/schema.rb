@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_22_195514) do
+ActiveRecord::Schema.define(version: 2021_10_23_195408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,8 +18,12 @@ ActiveRecord::Schema.define(version: 2021_10_22_195514) do
   create_table "favoriteformats", force: :cascade do |t|
     t.string "format"
     t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "zipcode"
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -42,18 +46,12 @@ ActiveRecord::Schema.define(version: 2021_10_22_195514) do
     t.string "email"
     t.string "password_digest"
     t.string "first_name"
-    t.string "zip_code"
+    t.integer "location_id"
     t.text "profile_picture"
     t.integer "age"
     t.text "about_me"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "zipcodes", force: :cascade do |t|
-    t.string "zipcode"
-    t.float "latitude"
-    t.float "longitude"
   end
 
 end

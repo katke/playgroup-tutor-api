@@ -1,5 +1,5 @@
 @host = http://localhost:3000
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo4LCJleHAiOjE2MzQ4Mzc0Mzd9.FDZM4cSxw9Y6882sJFpaaNBOrz4887_SNcYVU_3QAto
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE2MzUxMDgyNjR9.4hqebvgi9BEJZlmnfyR8oXtRXGyn0-wvz5sG4aWNJjA
 
 # SESSIONS CREATE (login) #
   POST {{host}}/sessions.json
@@ -24,20 +24,24 @@
     "email": "test@gmail.com",
     "password": "password",
     "first_name": "sam",
-    "zip_code": 401234,
+    "zip_code": "60188",
     "profile_picture": "google.com/slaksjdlkj",
     "age": 24,
     "about_me": "looking to play magic for the first time!"
   }
 ### USERS UPDATE
-  ATCH {{host}}/users/6
+  PATCH {{host}}/users/4.json
   Content-Type: application/json
+  Authorization: Bearer {{jwt}}
+
 
   {
-    "zip_code": 60067
+    "zip_code": 60018
   }
 ### USERS DESTROY
   DELETE {{host}}/users/6
+  Authorization: Bearer {{jwt}}
+
 
 # Messages #
 ### MESSAGES INDEX
@@ -96,3 +100,5 @@ Authorization: Bearer {{jwt}}
   DELETE {{host}}/relationships/6
 
 # next #
+### ZIPCODE FIND
+GET {{host}}/zipcodes/60443
