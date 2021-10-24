@@ -14,7 +14,9 @@ class UsersController < ApplicationController
       email: params[:email],
       password: params[:password],
       first_name: params[:first_name],
-      location_id: Location.find_by(zipcode: params[:zip_code]).id,
+      zipcode: params[:zipcode],
+      latitude: Location.find_by(zipcode: params[:zipcode]).latitude,
+      longitude: Location.find_by(zipcode: params[:zipcode]).longitude,
       profile_picture: params[:profile_picture],
       age: params[:age],
       about_me: params[:about_me],
@@ -31,11 +33,13 @@ class UsersController < ApplicationController
     user = User.find_by(id: current_user.id)
     user.email = params[:email] || user.email
     user.first_name = params[:first_name] || user.first_name
-    user.location_id = Location.find_by(zipcode: params[:zip_code]).id || user.location_id
+    user.zipcode = params[:zip_code].id || user.zipcode
+    user.latitude = Location.find_by(zipcode: params[:zip_code]).latitude || user.latitude
+    user.longitude = Location.find_by(zipcode: params[:zip_code]).longitude || user.longitude
     user.profile_picture = params[:profile_picture] || user.profile_picture
     user.age = params[:age] || user.age
     user.about_me = params[:about_me] || user.about_me
-    
+
     if user.save
       render json: user
     else

@@ -6,10 +6,10 @@ filedata.each { |line_of_data|
   Location.create!(zipcode: array[0], latitude: array[1].to_f, longitude: array[2].to_f)
 }
 #new users
-User.create!(email: "dave@gmail.com", password: "password", first_name: "Dave", location_id: 1, profile_picture: "https://c1.scryfall.com/file/scryfall-cards/art_crop/front/1/6/1671013a-2c15-44f0-b4bc-057eb5f727db.jpg?1562701916", age: 32, about_me: "Hi, looking for a group to practice some standard deck or play arena")
-User.create!(email: "test@test.com", password: "password", first_name: "Jack", location_id: 1, profile_picture: "https://c1.scryfall.com/file/scryfall-cards/art_crop/front/5/a/5adcb500-8c77-4925-8e2c-1243502827d1.jpg?1604243976", age: 25, about_me: "Just about_me: looking for a store that plays legacy, anyone know?")
-User.create!(email: "joe@test.com", password: "password", first_name: "Joe", location_id: 1, profile_picture: "https://c1.scryfall.com/file/scryfall-cards/art_crop/front/c/d/cd1deda0-c99d-4570-a5dd-f51eb5d12570.jpg?1562267420", age: 29, about_me: "What is this thing??")
-User.create!(email: "bob@test.com", password: "password", first_name: "Michelle", location_id: 1, profile_picture: "https://c1.scryfall.com/file/scryfall-cards/art_crop/front/6/5/65b7275a-5305-42e6-b5c3-8b88568b4e28.jpg?1562819184", age: 21, about_me: "Hey what's up guys")
+User.create!(email: "dave@gmail.com", password: "password", first_name: "Dave", zipcode: "60067", latitude: Location.find_by(zipcode: "60067").latitude, longitude: Location.find_by(zipcode: "60067").longitude, profile_picture: "https://c1.scryfall.com/file/scryfall-cards/art_crop/front/1/6/1671013a-2c15-44f0-b4bc-057eb5f727db.jpg?1562701916", age: 32, about_me: "Hi, looking for a group to practice some standard deck or play arena")
+User.create!(email: "test@test.com", password: "password", first_name: "Jack", zipcode: "60007", latitude: Location.find_by(zipcode: "60067").latitude, longitude: Location.find_by(zipcode: "60067").longitude, profile_picture: "https://c1.scryfall.com/file/scryfall-cards/art_crop/front/5/a/5adcb500-8c77-4925-8e2c-1243502827d1.jpg?1604243976", age: 25, about_me: "Just about_me: looking for a store that plays legacy, anyone know?")
+User.create!(email: "joe@test.com", password: "password", first_name: "Joe", zipcode: "60188", latitude: Location.find_by(zipcode: "60188").latitude, longitude: Location.find_by(zipcode: "60188").longitude, profile_picture: "https://c1.scryfall.com/file/scryfall-cards/art_crop/front/c/d/cd1deda0-c99d-4570-a5dd-f51eb5d12570.jpg?1562267420", age: 29, about_me: "What is this thing??")
+User.create!(email: "bob@test.com", password: "password", first_name: "Michelle", zipcode: "60067", latitude: Location.find_by(zipcode: "60067").latitude, longitude: Location.find_by(zipcode: "60067").longitude, profile_picture: "https://c1.scryfall.com/file/scryfall-cards/art_crop/front/6/5/65b7275a-5305-42e6-b5c3-8b88568b4e28.jpg?1562819184", age: 21, about_me: "Hey what's up guys")
 #their formats
 Favoriteformat.create!(format: "EDH", user_id: 1)
 Favoriteformat.create!(format: "Cube", user_id: 1)
@@ -31,3 +31,7 @@ Message.create!(sender_id: 2, receiver_id: 1, text: "I've never tried it, but i'
 Message.create!(sender_id: 1, receiver_id: 2, text: "Cool! Let's play on Friday at <insert local game store>")
 Message.create!(sender_id: 2, receiver_id: 1, text: "ok")
 Message.create!(sender_id: 3, receiver_id: 1, text: "hey")
+User.all.each { |user|
+  User.find_by(id: user.id).latitude = Location.find_by(zipcode: user.zipcode).latitude
+  User.find_by(id: user.id).longitude = Location.find_by(zipcode: user.zipcode).longitude
+}
