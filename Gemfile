@@ -46,3 +46,11 @@ gem 'bcrypt', '~> 3.1.7'
 
 #json web token
 gem 'jwt'
+
+#http requests
+gem 'http'
+
+#fake data
+group :development, :test do
+  gem 'faker'
+end

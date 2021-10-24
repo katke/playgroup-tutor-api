@@ -33,9 +33,9 @@ class UsersController < ApplicationController
     user = User.find_by(id: current_user.id)
     user.email = params[:email] || user.email
     user.first_name = params[:first_name] || user.first_name
-    user.zipcode = params[:zip_code].id || user.zipcode
-    user.latitude = Location.find_by(zipcode: params[:zip_code]).latitude || user.latitude
-    user.longitude = Location.find_by(zipcode: params[:zip_code]).longitude || user.longitude
+    user.zipcode = params[:zipcode].id || user.zipcode
+    user.latitude = Location.find_by(zipcode: params[:zipcode]).latitude || user.latitude
+    user.longitude = Location.find_by(zipcode: params[:zipcode]).longitude || user.longitude
     user.profile_picture = params[:profile_picture] || user.profile_picture
     user.age = params[:age] || user.age
     user.about_me = params[:about_me] || user.about_me
