@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
         Rails.application.credentials.fetch(:secret_key_base), # the secret key
         "HS256" # the encryption algorithm
       )
-      render json: { jwt: jwt, email: user.email, user_id: user.id, first_name: user.first_name, profile_picture: user.profile_picture }, status: :created
+      render json: { jwt: jwt, email: user.email, user_id: user.id, first_name: user.first_name, profile_picture: user.profile_picture, latitude: user.latitude, longitude: user.longitude }, status: :created
     else
       render json: {}, status: :unauthorized
     end
