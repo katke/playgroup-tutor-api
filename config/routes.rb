@@ -30,4 +30,5 @@ Rails.application.routes.draw do
   delete "/favoriteformats/:id" => "favoriteformats#destroy"
   #zipcodes
   get "/locations/:id" => "locations#show"
+  get "/locations" => "locations#index"
 end
