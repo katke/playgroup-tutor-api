@@ -6,22 +6,25 @@ class RelationshipsController < ApplicationController
     render json: relationships
   end
 
-  def friends
-    friendships = Relationship.select { |relationship|
-      relationship.status == "Accepted" && (relationship.requester_id == current_user.id) || (relationship.responder_id == current_user.id)
-    }
-    friends = []
-    friendships.each { |friendship|
-      unless friendship.responder_id == current_user.id
-        friends << User.find_by(id: friendship.responder_id)
-      end
-      unless friendship.requester_id == current_user.id
-        friends << User.find_by(id: friendship.requester_id)
-      end
-    }
-
-    render json: friends
+  def requests
+    requests = Relationship.where(["status = :status and responder_id = :responder_id", { status: "Pending", responder_id: current_user.id }])
+    render json: requests
   end
+
+  # def friends
+  #   friendships = Relationship.where(status = "Accepted", requester_id = current_user.id || responder_id = current_user.id)
+  #   friends = []
+  #   friendships.each { |friendship|
+  #     unless friendship.responder_id == current_user.id
+  #       friends << User.find_by(id: friendship.responder_id)
+  #     end
+  #     unless friendship.requester_id == current_user.id
+  #       friends << User.find_by(id: friendship.requester_id)
+  #     end
+  #   }
+
+  #   render json: friends
+  # end
 
   def show
     relationship = Relationship.find_by(id: "#{params["id"]}")
@@ -51,7 +54,7 @@ class RelationshipsController < ApplicationController
   end
 
   def update
-    relationship = Relationship.find_by(id: "#{params["id"]}")
+    relationship = Relationship.find_by(id: params[:id])
     relationship.status = params[:status] || relationship.status
     if relationship.save
       render json: relationship

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   delete "/messages/:id" => "messages#destroy"
   #relationships
   get "/friends" => "relationships#friends"
+  get "/friend-requests" => "relationships#requests"
   get "/relationships" => "relationships#index"
   get "/relationships/:id" => "relationships#show"
   post "/relationships" => "relationships#create"
