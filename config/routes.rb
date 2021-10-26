@@ -26,7 +26,6 @@ Rails.application.routes.draw do
   get "/favoriteformats" => "favoriteformats#index"
   get "/favoriteformats/:id" => "favoriteformats#show"
   post "/favoriteformats" => "favoriteformats#create"
-  patch "/favoriteformats/:id" => "favoriteformats#update"
   delete "/favoriteformats/:id" => "favoriteformats#destroy"
   #zipcodes
   get "/locations/:id" => "locations#show"

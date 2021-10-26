@@ -1,12 +1,12 @@
 @host = http://localhost:3000
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE2MzUxMDgyNjR9.4hqebvgi9BEJZlmnfyR8oXtRXGyn0-wvz5sG4aWNJjA
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE2MzUyODIwMDV9.x_XOuPmHEH4nvtx5JqjaIwKk7PsVG2otV4zr3wjlkBM
 
 # SESSIONS CREATE (login) #
   POST {{host}}/sessions.json
   Content-Type: application/json
 
   {
-    "email": "test@gmail.com",
+    "email": "wanda@test.com",
     "password": "password"
   }
 
@@ -100,5 +100,13 @@ Authorization: Bearer {{jwt}}
   DELETE {{host}}/relationships/6
 
 # next #
-### ZIPCODE FIND
-GET {{host}}/zipcodes/60443
+### LOCATION FIND
+GET {{host}}/locations/32
+# next #
+### FAVORITE FORMATS INDEX
+GET {{host}}/favoriteformats
+
+### FAVORITE FORMATS PATCH
+DELETE {{host}}/favoriteformats/4
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
