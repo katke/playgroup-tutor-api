@@ -1,5 +1,5 @@
 @host = http://localhost:3000
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE2MzUyODIwMDV9.x_XOuPmHEH4nvtx5JqjaIwKk7PsVG2otV4zr3wjlkBM
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE2MzUzODExMzV9.XzPIqG6QKWTR7w14rViftUtMGkGoIL06U4RpnPmVk-U
 
 # SESSIONS CREATE (login) #
   POST {{host}}/sessions.json
@@ -58,8 +58,8 @@
   Authorization: Bearer {{jwt}}
 
   {
-    "text": "Snake, this is a sneaking mission.",
-    "receiver_id": 6
+    "text": "Hi 77",
+    "receiver_id": 77
   }
 ### MESSAGES UPDATE
   PATCH {{host}}/messages/7
