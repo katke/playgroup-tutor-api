@@ -1,6 +1,11 @@
 class User < ApplicationRecord
   has_secure_password
   validates :email, presence: true, uniqueness: true
+  validates :first_name, presence: true
+  validates :zipcode, presence: true
+  validates :age, presence: true
+  validates :profile_picture, presence: true
+  validates :about_me, presence: true
 
   has_many :favoriteformats
 

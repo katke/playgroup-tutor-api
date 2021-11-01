@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user, except: [:create]
+
   def index
     users = User.all
     render json: users
@@ -15,14 +17,13 @@ class UsersController < ApplicationController
       password: params[:password],
       first_name: params[:first_name],
       zipcode: params[:zipcode],
-      latitude: Location.find_by(zipcode: params[:zipcode]).latitude,
-      longitude: Location.find_by(zipcode: params[:zipcode]).longitude,
       profile_picture: params[:profile_picture],
       age: params[:age],
       about_me: params[:about_me],
     )
-
     if user.save
+      user[latitude] = Location.find_by(zipcode: params[:zipcode]).latitude
+      user[longitude] = Location.find_by(zipcode: params[:zipcode]).longitude
       render json: user
     else
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity

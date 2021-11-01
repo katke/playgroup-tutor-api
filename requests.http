@@ -101,7 +101,7 @@ Authorization: Bearer {{jwt}}
 
 # next #
 ### LOCATION FIND
-GET {{host}}/locations/32
+GET {{host}}/locations/60188
 # next #
 ### FAVORITE FORMATS INDEX
 GET {{host}}/favoriteformats
