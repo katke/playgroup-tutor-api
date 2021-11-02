@@ -1,5 +1,5 @@
 class FavoriteformatsController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user, except: [:create]
 
   def index
     favorites = Favoriteformat.where(user_id: current_user.id)

@@ -21,11 +21,11 @@
   Content-Type: application/json
 
   {
-    "email": "test6@gmail.com",
+    "email": "test1230@gmail.com",
     "password": "password",
-    "first_name": "Sam",
-    "zipcode": "60007",
-    "profile_picture": "google.com/slaksjdlkj",
+    "first_name": "Dave",
+    "zipcode": "asldkj",
+    "profile_picture": "assets/img/icons/Rakdos_Logo.png",
     "age": 24,
     "about_me": "looking to play magic for the first time!"
   }

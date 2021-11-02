@@ -21,11 +21,21 @@ class UsersController < ApplicationController
       age: params[:age],
       about_me: params[:about_me],
     )
+
+    #check if the location exists, if it does- assign the lat/long. Otherwise set to nil
+    location = Location.find_by(zipcode: params[:zipcode])
+    if location
+      user[:latitude] = Location.find_by(zipcode: params[:zipcode]).latitude
+      user[:longitude] = Location.find_by(zipcode: params[:zipcode]).longitude
+    else
+      user[:zipcode] = nil
+    end
+
+    #if the zipcode is bad, this workaround sends the error long with the rest of the errors"
     if user.save
-      user[latitude] = Location.find_by(zipcode: params[:zipcode]).latitude
-      user[longitude] = Location.find_by(zipcode: params[:zipcode]).longitude
       render json: user
     else
+      user.errors.add :base, "ZIP code must be a valid 5 digit entry"
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
     end
   end
@@ -35,15 +45,23 @@ class UsersController < ApplicationController
     user.email = params[:email] || user.email
     user.first_name = params[:first_name] || user.first_name
     user.zipcode = params[:zipcode] || user.zipcode
-    user.latitude = Location.find_by(zipcode: params[:zipcode]).latitude || user.latitude
-    user.longitude = Location.find_by(zipcode: params[:zipcode]).longitude || user.longitude
     user.profile_picture = params[:profile_picture] || user.profile_picture
     user.age = params[:age] || user.age
     user.about_me = params[:about_me] || user.about_me
+    #check if the location exists, if it does- assign the lat/long. Otherwise set to nil
+    location = Location.find_by(zipcode: params[:zipcode])
+    if location
+      user[:latitude] = Location.find_by(zipcode: params[:zipcode]).latitude
+      user[:longitude] = Location.find_by(zipcode: params[:zipcode]).longitude
+    else
+      user[:zipcode] = nil
+    end
 
+    #if the zipcode is bad, this workaround sends the error long with the rest of the errors"
     if user.save
       render json: user
     else
+      user.errors.add :base, "ZIP code must be a valid 5 digit entry"
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
     end
   end
