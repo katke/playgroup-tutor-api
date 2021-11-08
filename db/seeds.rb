@@ -1,5 +1,3 @@
-require "faker"
-
 # zipcodes
 puts "importing zip codes..."
 filedata = File.open("./db/zipcodelist.csv").readlines.map(&:chomp)
@@ -23,7 +21,7 @@ User.create!(email: "bob@test.com", password: "password", first_name: "Michelle"
 puts "..."
 puts "generating base users...done!"
 
-#loop
+#bot factory
 puts "generating bots..."
 100.times do
   location = nil
@@ -33,14 +31,17 @@ puts "generating bots..."
       puts "failed to find location, trying again"
     end
   end
+
+  # double sided cards actually have two art crops, and so the response is an array, which messes up the seed.
+  #  This just searches for another card instead.
   scryfall_art_crop = nil
   while scryfall_art_crop == nil
-    scryfall_art_crop = HTTP.get("https://api.scryfall.com/cards/random").parse()["image_uris"]["art_crop"]
-    if !defined?(scryfall_art_crop)
-      puts "failed to find card, trying again"
+    scryfall_art_crop = HTTP.get("https://api.scryfall.com/cards/random").parse()
+    if scryfall_art_crop["image_uris"]
+      scryfall_art_crop = scryfall_art_crop["image_uris"]["art_crop"]
+    else
       scryfall_art_crop = nil
     end
-    puts "worked! ...#{scryfall_art_crop}"
     sleep(1)
   end
   sleep(1)
@@ -52,23 +53,24 @@ puts "generating bots..."
 end
 puts "generating bots...done!"
 
-puts "generating favorite formats..."
 #their formats
-formats = ["Commander / EDH",
-           "Standard",
-           "Cube / Draft",
-           "Modern",
-           "Pauper",
-           "Pioneer",
-           "Brawl",
-           "Historic",
-           "Legacy",
-           "Vintage"]
+puts "generating favorite formats..."
 User.all.each { |user|
-  rand = rand(1..5)
-  rand.times do
-    Favoriteformat.create!(format: formats.sample, user_id: user.id)
-    puts "..."
+  formats = ["Commander / EDH",
+             "Standard",
+             "Cube / Draft",
+             "Modern",
+             "Pauper",
+             "Pioneer",
+             "Brawl",
+             "Historic",
+             "Legacy",
+             "Vintage"]
+  repetition = rand(1..5)
+  repetition.times do
+    sliced = formats.sample
+    formats.delete(sliced)
+    Favoriteformat.create!(format: sliced, user_id: user.id)
   end
 }
 puts "generating favorite formats...done!"
@@ -76,11 +78,15 @@ puts "generating favorite formats...done!"
 #their relationships
 puts "generating relationships...done!"
 Relationship.create!(requester_id: 1, responder_id: 2, status: "Accepted")
-Relationship.create!(requester_id: 3, responder_id: 2, status: "Accepted")
-Relationship.create!(requester_id: 3, responder_id: 1, status: "Pending")
-Relationship.create!(requester_id: 4, responder_id: 1, status: "Blocked")
-Relationship.create!(requester_id: 4, responder_id: 2, status: "Blocked")
-Relationship.create!(requester_id: 4, responder_id: 3, status: "Pending")
+Relationship.create!(requester_id: 1, responder_id: 3, status: "Accepted")
+Relationship.create!(requester_id: 1, responder_id: 10, status: "Accepted")
+Relationship.create!(requester_id: 1, responder_id: 12, status: "Accepted")
+Relationship.create!(requester_id: 6, responder_id: 1, status: "Accepted")
+Relationship.create!(requester_id: 7, responder_id: 1, status: "Pending")
+Relationship.create!(requester_id: 9, responder_id: 1, status: "Blocked")
+Relationship.create!(requester_id: 4, responder_id: 1, status: "Pending")
+Relationship.create!(requester_id: 30, responder_id: 1, status: "Pending")
+Relationship.create!(requester_id: 20, responder_id: 1, status: "Pending")
 puts "generating relationships...done!"
 
 #their messages
@@ -93,9 +99,4 @@ Message.create!(sender_id: 1, receiver_id: 2, text: "Cool! Let's play on Friday 
 Message.create!(sender_id: 2, receiver_id: 1, text: "ok")
 Message.create!(sender_id: 3, receiver_id: 1, text: "hey")
 puts "generating messages...done!"
-
-#
-# User.all.each { |user|
-#   User.find_by(id: user.id).latitude = Location.find_by(zipcode: user.zipcode).latitude
-#   User.find_by(id: user.id).longitude = Location.find_by(zipcode: user.zipcode).longitude
-# }
+puts "!!seeding completed!!"
