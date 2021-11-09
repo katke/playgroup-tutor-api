@@ -11,6 +11,11 @@ class RelationshipsController < ApplicationController
     render json: requests
   end
 
+  def friendships
+    friendships = Relationship.where({ status: "Accepted", responder_id: current_user.id }).or(Relationship.where({ status: "Accepted", requester_id: current_user.id }))
+    render json: friendships
+  end
+
   def friends
     friendships = Relationship.where({ status: "Accepted", responder_id: current_user.id }).or(Relationship.where({ status: "Accepted", requester_id: current_user.id }))
     friends = []
