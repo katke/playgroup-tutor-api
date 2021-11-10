@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       )
       render json: { jwt: jwt, email: user.email, user_id: user.id, first_name: user.first_name, profile_picture: user.profile_picture, latitude: user.latitude, longitude: user.longitude }, status: :created
     else
-      render json: {}, status: :unauthorized
+      render json: { errors: ["Invalid email/password combination"] }, status: :unauthorized
     end
   end
 end
