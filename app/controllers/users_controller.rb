@@ -2,12 +2,12 @@ class UsersController < ApplicationController
   before_action :authenticate_user, except: [:create, :index]
 
   def index
-    users = User.all
+    users = User.includes(:favoriteformats).all
     render json: users
   end
 
   def show
-    user = User.find_by(id: "#{params["id"]}")
+    user = User.includes(:favoriteformats).find_by(id: "#{params["id"]}")
     render json: user.as_json
   end
 
