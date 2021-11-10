@@ -31,6 +31,21 @@ class RelationshipsController < ApplicationController
     render json: friends
   end
 
+  def blocked
+    blocked_relationships = Relationship.where({ status: "Blocked", responder_id: current_user.id }).or(Relationship.where({ status: "Blocked", requester_id: current_user.id }))
+    blocked = []
+    blocked_relationships.each { |blocked_relationship|
+      unless blocked_relationship.responder_id == current_user.id
+        blocked << blocked_relationship.responder
+      end
+      unless blocked_relationship.requester_id == current_user.id
+        blocked << blocked_relationship.requester
+      end
+    }
+
+    render json: blocked
+  end
+
   def show
     relationship = Relationship.find_by(id: "#{params["id"]}")
     render json: relationship
