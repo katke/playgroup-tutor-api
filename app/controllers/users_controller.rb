@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def show
     user = User.includes(:favoriteformats).find_by(id: "#{params["id"]}")
-    render json: user.as_json
+    render json: user
   end
 
   def create
