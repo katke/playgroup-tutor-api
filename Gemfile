@@ -51,6 +51,8 @@ gem 'jwt'
 gem 'http'
 
 #fake data
-group :development, :test do
-  gem 'faker'
-end
+gem 'faker'
+
+# group :development, :test do
+#   gem 'faker'
+# end
