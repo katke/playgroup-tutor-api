@@ -99,10 +99,6 @@ Authorization: Bearer {{jwt}}
 ### RELATIONSHIP DESTROY
   DELETE {{host}}/relationships/6
 
-# next #
-### LOCATION FIND
-GET {{host}}/locations/60188
-# next #
 ### FAVORITE FORMATS INDEX
 GET {{host}}/favoriteformats
 

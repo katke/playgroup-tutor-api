@@ -23,10 +23,11 @@ class UsersController < ApplicationController
     )
 
     #check if the location exists, if it does- assign the lat/long. Otherwise set to nil
-    location = Location.find_by(zipcode: params[:zipcode])
-    if location
-      user[:latitude] = Location.find_by(zipcode: params[:zipcode]).latitude
-      user[:longitude] = Location.find_by(zipcode: params[:zipcode]).longitude
+    zipcodes = eval(File.read("./db/zips.rb"))
+
+    if zipcodes[params[:zipcode]]
+      user[:latitude] = zipcodes[params[:zipcode]][:latitude]
+      user[:longitude] = zipcodes[params[:zipcode]][:longitude]
     else
       user[:zipcode] = nil
     end
@@ -48,13 +49,16 @@ class UsersController < ApplicationController
     user.profile_picture = params[:profile_picture] || user.profile_picture
     user.age = params[:age] || user.age
     user.about_me = params[:about_me] || user.about_me
+
     #check if the location exists, if it does- assign the lat/long. Otherwise set to nil
-    location = Location.find_by(zipcode: params[:zipcode])
-    if location
-      user[:latitude] = Location.find_by(zipcode: params[:zipcode]).latitude
-      user[:longitude] = Location.find_by(zipcode: params[:zipcode]).longitude
-    else
-      user[:zipcode] = nil
+    if params[:zipcode]
+      zipcodes = eval(File.read("./db/zips.rb"))
+      if zipcodes[params[:zipcode]]
+        user[:latitude] = zipcodes[params[:zipcode]][:latitude]
+        user[:longitude] = zipcodes[params[:zipcode]][:longitude]
+      else
+        user[:zipcode] = nil
+      end
     end
 
     #if the zipcode is bad, this workaround sends the error long with the rest of the errors"
