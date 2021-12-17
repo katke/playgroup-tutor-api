@@ -9,6 +9,7 @@ class MessagesController < ApplicationController
   def my_messages
     messages = Message.select { |message|
       message.sender_id == current_user.id || message.receiver_id == current_user.id
+      # Seems like this logic is being duplicated in the front end?
     }
     render json: messages
   end
