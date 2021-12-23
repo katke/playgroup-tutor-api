@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, except: [:create, :index]
+  # I was wondering why I could access https://playgroup-tutor-api.herokuapp.com/users without 
+  # any auth—was this just done to simplify the dev process? I wouldn't think you'd
+  # want to leave a route containing all your user info accessible to wider public
 
   def index
     users = User.includes(:favoriteformats).all
